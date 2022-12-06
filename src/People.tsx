@@ -8,22 +8,27 @@ interface person {
 }
 
 export default function People(props: IProps): JSX.Element {
+  const mappedArray = props.peopleArray.sort((a, b) =>
+    a.secondName.localeCompare(b.secondName)
+  );
   return (
     <>
-      {props.peopleArray.map((item, index) => {
-        return (
-          <div key={index}>
-            <th> Name</th>
-            <td>{item.name}</td>
+      <table>
+        <th> Name</th>
 
-            <th> Second Name</th>
-            <td>{item.secondName}</td>
+        {mappedArray.map((item, index) => (
+          <td key={index}>{item.name}</td>
+        ))}
 
-            <th> Phone Number</th>
-            <td>{item.number}</td>
-          </div>
-        );
-      })}
+        <th> Second Name</th>
+        {mappedArray.map((item, index) => (
+          <td key={index}>{item.secondName}</td>
+        ))}
+        <th> Phone Number</th>
+        {mappedArray.map((item, index) => (
+          <td key={index}>{item.number}</td>
+        ))}
+      </table>
     </>
   );
 }
