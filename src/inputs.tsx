@@ -7,34 +7,31 @@ interface person {
 }
 
 interface Iprops {
-  handlePerson: (person: person[]) => void;
+  handlePerson: (person: person) => void;
 }
 
 export default function Inputs(props: Iprops): JSX.Element {
   const [firstName, setFirstName] = useState("");
   const [secondName, setSecondName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
-  const [peopleArray, setPeopleArray] = useState<person[]>([]);
-
-  const personObj = Object();
-
+  
+  
   const handleSubmit = () => {
+    const personObj = Object();
     personObj.name = firstName;
     personObj.secondName = secondName;
     personObj.number = phoneNumber;
-    setPeopleArray([...peopleArray, personObj]);
-    console.log(peopleArray);
-    props.handlePerson(peopleArray);
+    props.handlePerson(personObj);
   };
 
   return (
     <>
-      <form
+      <form className = "container"
         onSubmit={(e) => {
           e.preventDefault();
-        }}
+        }}  //prevents a page reload
       >
-        <p> Please fill out the following input sections</p>
+        <p> Enter your details to add them to the PhoneBook</p>
         <p> First name:</p>
         <input
           id="name"
@@ -59,7 +56,7 @@ export default function Inputs(props: Iprops): JSX.Element {
           onChange={(e) => setPhoneNumber(e.target.value)}
         />
         <br />
-        <button type="submit" onClick={handleSubmit}>
+        <button className = "submitBtn" type="submit" onClick={handleSubmit}>
           {" "}
           submit{" "}
         </button>

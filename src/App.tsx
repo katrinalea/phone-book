@@ -10,8 +10,10 @@ interface person {
 function App(): JSX.Element {
   const [peopleArray, setPeopleArray] = useState<person[]>([]);
 
-  function handleInfo(array: person[]) {
-    setPeopleArray(array);
+  function handleInfo(onePerson: person) {
+    setPeopleArray([...peopleArray, onePerson]);
+    console.log("handle info recieved person", onePerson)
+    return peopleArray
   }
 
   return (
